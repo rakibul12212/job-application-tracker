@@ -1,15 +1,21 @@
 "use client";
+
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 const FormSection = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     console.log("file submitted", data);
   };
-  const notify = () => toast("Submitted Successfully");
+  //   const notify = () => toast("Submitted Successfully");
+
   return (
     <div className="p-6 mt-4 bg-white shadow-lg rounded-xl max-w-4xl mx-auto">
       <form
@@ -22,10 +28,13 @@ const FormSection = () => {
           </label>
           <input
             id="companyName"
-            {...register("companyName")}
+            {...register("companyName", { required: true })}
             placeholder="Enter company name"
-            className="border border-gray-300 rounded p-2"
+            className="border border-gray-300 outline-none rounded p-2"
           />
+          {errors.companyName && (
+            <span className="text-red-500 text-xs">This field is required</span>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -34,10 +43,13 @@ const FormSection = () => {
           </label>
           <input
             id="jobTitle"
-            {...register("jobTitle")}
+            {...register("jobTitle", { required: true })}
             placeholder="Enter job title"
-            className="border border-gray-300 rounded p-2"
+            className="border border-gray-300 outline-none rounded p-2"
           />
+          {errors.jobTitle && (
+            <span className="text-red-500 text-xs">This field is required</span>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -46,10 +58,13 @@ const FormSection = () => {
           </label>
           <input
             id="location"
-            {...register("location")}
+            {...register("location", { required: true })}
             placeholder="Enter location"
-            className="border border-gray-300 rounded p-2"
+            className="border border-gray-300 outline-none rounded p-2"
           />
+          {errors.location && (
+            <span className="text-red-500 text-xs">This field is required</span>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -59,9 +74,12 @@ const FormSection = () => {
           <input
             id="applicationDate"
             type="date"
-            {...register("applicationDate")}
-            className="border border-gray-300 rounded p-2"
+            {...register("applicationDate", { required: true })}
+            className="border border-gray-300 outline-none rounded p-2"
           />
+          {errors.applicationDate && (
+            <span className="text-red-500 text-xs">This field is required</span>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -70,10 +88,13 @@ const FormSection = () => {
           </label>
           <input
             id="contactPerson"
-            {...register("contactPerson")}
+            {...register("contactPerson", { required: true })}
             placeholder="Enter contact person"
-            className="border border-gray-300 rounded p-2"
+            className="border border-gray-300 outline-none rounded p-2"
           />
+          {errors.contactPerson && (
+            <span className="text-red-500 text-xs">This field is required</span>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -83,10 +104,13 @@ const FormSection = () => {
           <input
             id="contactEmail"
             type="email"
-            {...register("contactEmail")}
+            {...register("contactEmail", { required: true })}
             placeholder="Enter email"
-            className="border border-gray-300 rounded p-2"
-          />
+            className="border border-gray-300 outline-none rounded p-2"
+          />{" "}
+          {errors.contactEmail && (
+            <span className="text-red-500 text-xs">This field is required</span>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -96,10 +120,13 @@ const FormSection = () => {
           <input
             id="contactNumber"
             type="tel"
-            {...register("contactNumber")}
+            {...register("contactNumber", { required: true })}
             placeholder="Enter contact number"
-            className="border border-gray-300 rounded p-2"
+            className="border border-gray-300 outline-none rounded p-2"
           />
+          {errors.contactNumber && (
+            <span className="text-red-500 text-xs">This field is required</span>
+          )}
         </div>
 
         <div className="flex flex-col">
@@ -109,9 +136,12 @@ const FormSection = () => {
           <input
             id="resume"
             type="file"
-            {...register("resume")}
-            className="border border-gray-300 rounded p-2"
+            {...register("resume", { required: true })}
+            className="border border-gray-300 outline-none rounded p-2"
           />
+          {errors.resume && (
+            <span className="text-red-500 text-xs">This field is required</span>
+          )}
         </div>
 
         <div className="col-span-1 md:col-span-2 flex flex-col">
@@ -123,19 +153,19 @@ const FormSection = () => {
             rows={4}
             {...register("notes")}
             placeholder="Write something..."
-            className="border border-gray-300 rounded p-2"
+            className="border border-gray-300 outline-none rounded p-2"
           />
         </div>
 
         <div className="col-span-1 md:col-span-1">
           <button
             type="submit"
-            onClick={notify}
+            // onClick={notify}
             className="w-full bg-white text-black border py-2 rounded hover:bg-black hover:text-white  transition "
           >
             Submit
           </button>
-          <ToastContainer />
+          {/* <ToastContainer /> */}
         </div>
       </form>
     </div>
