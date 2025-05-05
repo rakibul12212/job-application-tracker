@@ -2,7 +2,8 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { DatePicker, Form, Input, Select, Upload } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import Button from "./Button";
+import Btn from "./btn";
+
 
 const onChange = (date, dateString) => {
   console.log(date, dateString);
@@ -75,7 +76,7 @@ const FormSection = () => {
         </Form.Item>
 
         <Form.Item className="text-left">
-          <Button />
+          <Btn />
         </Form.Item>
       </Form>
     </div>
