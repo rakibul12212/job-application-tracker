@@ -8,12 +8,14 @@ const FormSection = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     console.log("file submitted", data);
     toast.success("Form submitted successfully");
+    reset();
   };
 
   return (
