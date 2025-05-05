@@ -1,8 +1,8 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FormSection = () => {
   const {
@@ -13,8 +13,8 @@ const FormSection = () => {
 
   const onSubmit = (data) => {
     console.log("file submitted", data);
+    toast.success("Form submitted successfully");
   };
-  //   const notify = () => toast("Submitted Successfully");
 
   return (
     <div className="p-6 mt-4 bg-white shadow-lg rounded-xl max-w-4xl mx-auto">
@@ -28,12 +28,16 @@ const FormSection = () => {
           </label>
           <input
             id="companyName"
-            {...register("companyName", { required: true })}
+            {...register("companyName", {
+              required: "Company Name is required",
+            })}
             placeholder="Enter company name"
             className="border border-gray-300 outline-none rounded p-2"
           />
           {errors.companyName && (
-            <span className="text-red-500 text-xs">This field is required</span>
+            <span className="text-red-500 text-xs">
+              {errors.companyName.message}
+            </span>
           )}
         </div>
 
@@ -43,12 +47,14 @@ const FormSection = () => {
           </label>
           <input
             id="jobTitle"
-            {...register("jobTitle", { required: true })}
+            {...register("jobTitle", { required: "Job title is required" })}
             placeholder="Enter job title"
             className="border border-gray-300 outline-none rounded p-2"
           />
           {errors.jobTitle && (
-            <span className="text-red-500 text-xs">This field is required</span>
+            <span className="text-red-500 text-xs">
+              {errors.jobTitle.message}
+            </span>
           )}
         </div>
 
@@ -58,12 +64,14 @@ const FormSection = () => {
           </label>
           <input
             id="location"
-            {...register("location", { required: true })}
+            {...register("location", { required: "Location is required" })}
             placeholder="Enter location"
             className="border border-gray-300 outline-none rounded p-2"
           />
           {errors.location && (
-            <span className="text-red-500 text-xs">This field is required</span>
+            <span className="text-red-500 text-xs">
+              {errors.location.message}
+            </span>
           )}
         </div>
 
@@ -74,11 +82,13 @@ const FormSection = () => {
           <input
             id="applicationDate"
             type="date"
-            {...register("applicationDate", { required: true })}
+            {...register("applicationDate", { required: "Date is required" })}
             className="border border-gray-300 outline-none rounded p-2"
           />
           {errors.applicationDate && (
-            <span className="text-red-500 text-xs">This field is required</span>
+            <span className="text-red-500 text-xs">
+              {errors.applicationDate.message}
+            </span>
           )}
         </div>
 
@@ -88,12 +98,14 @@ const FormSection = () => {
           </label>
           <input
             id="contactPerson"
-            {...register("contactPerson", { required: true })}
+            {...register("contactPerson", { required: "Name is required" })}
             placeholder="Enter contact person"
             className="border border-gray-300 outline-none rounded p-2"
           />
           {errors.contactPerson && (
-            <span className="text-red-500 text-xs">This field is required</span>
+            <span className="text-red-500 text-xs">
+              {errors.contactPerson.message}
+            </span>
           )}
         </div>
 
@@ -104,12 +116,20 @@ const FormSection = () => {
           <input
             id="contactEmail"
             type="email"
-            {...register("contactEmail", { required: true })}
+            {...register("contactEmail", {
+              required: "email is required",
+              pattern: {
+                value: /^[a-z0-9]+@[a-z0-9.-]+.[a-z]$/,
+                message: "Enter a valid email ",
+              },
+            })}
             placeholder="Enter email"
             className="border border-gray-300 outline-none rounded p-2"
           />{" "}
           {errors.contactEmail && (
-            <span className="text-red-500 text-xs">This field is required</span>
+            <span className="text-red-500 text-xs">
+              {errors.contactEmail.message}
+            </span>
           )}
         </div>
 
@@ -120,27 +140,38 @@ const FormSection = () => {
           <input
             id="contactNumber"
             type="tel"
-            {...register("contactNumber", { required: true })}
+            {...register("contactNumber", {
+              required: "contact is required",
+              pattern: {
+                value: /^[0-9]{11}$/,
+                message: "Contact number must be exactly 11 digits",
+              },
+            })}
             placeholder="Enter contact number"
             className="border border-gray-300 outline-none rounded p-2"
           />
           {errors.contactNumber && (
-            <span className="text-red-500 text-xs">This field is required</span>
+            <span className="text-red-500 text-xs">
+              {errors.contactNumber.message}
+            </span>
           )}
         </div>
 
         <div className="flex flex-col">
           <label htmlFor="resume" className="mb-1 text-sm font-medium ">
-            Upload File
+            Upload Resume
           </label>
           <input
             id="resume"
             type="file"
-            {...register("resume", { required: true })}
+            accept="application/pdf"
+            {...register("resume", { required: "pdf file is required" })}
             className="border border-gray-300 outline-none rounded p-2"
           />
           {errors.resume && (
-            <span className="text-red-500 text-xs">This field is required</span>
+            <span className="text-red-500 text-xs">
+              {errors.resume.message}
+            </span>
           )}
         </div>
 
@@ -160,14 +191,13 @@ const FormSection = () => {
         <div className="col-span-1 md:col-span-1">
           <button
             type="submit"
-            // onClick={notify}
             className="w-full bg-white text-black border py-2 rounded hover:bg-black hover:text-white  transition "
           >
             Submit
           </button>
-          {/* <ToastContainer /> */}
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };
