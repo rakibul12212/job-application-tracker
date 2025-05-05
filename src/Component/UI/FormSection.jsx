@@ -4,9 +4,14 @@ import { DatePicker, Form, Input, Select, Upload } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import Btn from "./btn";
 
-
 const onChange = (date, dateString) => {
   console.log(date, dateString);
+};
+const normFile = (e) => {
+  if (Array.isArray(e)) {
+    return e;
+  }
+  return e === null || e === void 0 ? void 0 : e.fileList;
 };
 
 const FormSection = () => {
@@ -53,19 +58,23 @@ const FormSection = () => {
             </Select>
           </Form.Item>
 
-          <Form.Item label="Upload Resume or File" name="upload">
+          <Form.Item
+            label="Upload"
+            valuePropName="fileList"
+            getValueFromEvent={normFile}
+          >
             <Upload action="/upload.do" listType="picture-card">
               <button
-                type="button"
-                className="flex flex-col items-center justify-center text-gray-500"
                 style={{
+                  color: "inherit",
+                  cursor: "inherit",
+                  border: 0,
                   background: "none",
-                  border: "none",
-                  cursor: "pointer",
                 }}
+                type="button"
               >
                 <PlusOutlined />
-                <div className="mt-2 text-sm">Upload</div>
+                <div style={{ marginTop: 8 }}>Upload</div>
               </button>
             </Upload>
           </Form.Item>
