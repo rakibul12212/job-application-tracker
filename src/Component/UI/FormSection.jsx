@@ -1,93 +1,143 @@
 "use client";
-import { PlusOutlined } from "@ant-design/icons";
-import { DatePicker, Form, Input, Select, Upload } from "antd";
-import TextArea from "antd/es/input/TextArea";
-import Btn from "./btn";
-
-const onChange = (date, dateString) => {
-  console.log(date, dateString);
-};
-const normFile = (e) => {
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e === null || e === void 0 ? void 0 : e.fileList;
-};
+import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FormSection = () => {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    console.log("file submitted", data);
+  };
+  const notify = () => toast("Submitted Successfully");
   return (
-    <div className="p-6 md:p-6 mt-4 bg-white shadow-lg rounded-xl max-w-4xl mx-auto">
-      <Form layout="vertical">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
-          <Form.Item label="Company Name" name="companyName">
-            <Input placeholder="Enter company name" />
-          </Form.Item>
-
-          <Form.Item label="Job Title" name="jobTitle">
-            <Input placeholder="Enter job title" />
-          </Form.Item>
-
-          <Form.Item label="Location" name="location">
-            <Input placeholder="Enter location" />
-          </Form.Item>
-
-          <Form.Item label="Application Date" name="applicationDate">
-            <DatePicker
-              className="w-full"
-              placeholder="Select application date"
-              onChange={onChange}
-            />
-          </Form.Item>
-
-          <Form.Item label="Contact Person" name="contactPerson">
-            <Input placeholder="Enter contact person name" />
-          </Form.Item>
-
-          <Form.Item label="Contact Email" name="contactEmail">
-            <Input type="email" placeholder="Enter contact email" />
-          </Form.Item>
-
-          <Form.Item label="Contact Number" name="contactNumber">
-            <Input type="number" placeholder="Enter contact number" />
-          </Form.Item>
-          <Form.Item label="Select">
-            <Select placeholder="From where you applied">
-              <Select.Option value="demo">LinkedIn</Select.Option>
-              <Select.Option value="demo">BD Jobs</Select.Option>
-              <Select.Option value="demo">Facebook</Select.Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item
-            label="Upload"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-          >
-            <Upload action="/upload.do" listType="picture-card">
-              <button
-                style={{
-                  color: "inherit",
-                  cursor: "inherit",
-                  border: 0,
-                  background: "none",
-                }}
-                type="button"
-              >
-                <PlusOutlined />
-                <div style={{ marginTop: 8 }}>Upload</div>
-              </button>
-            </Upload>
-          </Form.Item>
+    <div className="p-6 mt-4 bg-white shadow-lg rounded-xl max-w-4xl mx-auto">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"
+      >
+        <div className="flex flex-col">
+          <label htmlFor="companyName" className="mb-1 text-sm font-medium">
+            Company Name
+          </label>
+          <input
+            id="companyName"
+            {...register("companyName")}
+            placeholder="Enter company name"
+            className="border border-gray-300 rounded p-2"
+          />
         </div>
 
-        <Form.Item label="Additional Notes" name="notes">
-          <TextArea rows={4} placeholder="Write something..." maxLength={200} />
-        </Form.Item>
+        <div className="flex flex-col">
+          <label htmlFor="jobTitle" className="mb-1 text-sm font-medium">
+            Job Title
+          </label>
+          <input
+            id="jobTitle"
+            {...register("jobTitle")}
+            placeholder="Enter job title"
+            className="border border-gray-300 rounded p-2"
+          />
+        </div>
 
-        <Form.Item className="text-left">
-          <Btn />
-        </Form.Item>
-      </Form>
+        <div className="flex flex-col">
+          <label htmlFor="location" className="mb-1 text-sm font-medium">
+            Location
+          </label>
+          <input
+            id="location"
+            {...register("location")}
+            placeholder="Enter location"
+            className="border border-gray-300 rounded p-2"
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label htmlFor="applicationDate" className="mb-1 text-sm font-medium">
+            Application Date
+          </label>
+          <input
+            id="applicationDate"
+            type="date"
+            {...register("applicationDate")}
+            className="border border-gray-300 rounded p-2"
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label htmlFor="contactPerson" className="mb-1 text-sm font-medium">
+            Contact Person
+          </label>
+          <input
+            id="contactPerson"
+            {...register("contactPerson")}
+            placeholder="Enter contact person"
+            className="border border-gray-300 rounded p-2"
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label htmlFor="contactEmail" className="mb-1 text-sm font-medium">
+            Contact Email
+          </label>
+          <input
+            id="contactEmail"
+            type="email"
+            {...register("contactEmail")}
+            placeholder="Enter email"
+            className="border border-gray-300 rounded p-2"
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label htmlFor="contactNumber" className="mb-1 text-sm font-medium">
+            Contact Number
+          </label>
+          <input
+            id="contactNumber"
+            type="tel"
+            {...register("contactNumber")}
+            placeholder="Enter contact number"
+            className="border border-gray-300 rounded p-2"
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label htmlFor="resume" className="mb-1 text-sm font-medium ">
+            Upload File
+          </label>
+          <input
+            id="resume"
+            type="file"
+            {...register("resume")}
+            className="border border-gray-300 rounded p-2"
+          />
+        </div>
+
+        <div className="col-span-1 md:col-span-2 flex flex-col">
+          <label htmlFor="notes" className="mb-1 text-sm font-medium">
+            Additional Notes
+          </label>
+          <textarea
+            id="notes"
+            rows={4}
+            {...register("notes")}
+            placeholder="Write something..."
+            className="border border-gray-300 rounded p-2"
+          />
+        </div>
+
+        <div className="col-span-1 md:col-span-1">
+          <button
+            type="submit"
+            onClick={notify}
+            className="w-full bg-white text-black border py-2 rounded hover:bg-black hover:text-white  transition "
+          >
+            Submit
+          </button>
+          <ToastContainer />
+        </div>
+      </form>
     </div>
   );
 };
