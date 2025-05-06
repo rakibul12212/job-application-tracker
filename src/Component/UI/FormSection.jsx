@@ -61,13 +61,15 @@ const FormSection = () => {
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="location" className="mb-1 text-sm font-medium">
-            Location
+          <label htmlFor="CompanyLocation" className="mb-1 text-sm font-medium">
+            Company Location
           </label>
           <input
-            id="location"
-            {...register("location", { required: "Location is required" })}
-            placeholder="Enter location"
+            id="CompanyLocation"
+            {...register("CompanyLocation", {
+              required: "CompanyLocation is required",
+            })}
+            placeholder="Enter Company location"
             className="border border-gray-300 outline-none rounded p-2"
           />
           {errors.location && (
@@ -158,21 +160,29 @@ const FormSection = () => {
             </span>
           )}
         </div>
-
         <div className="flex flex-col">
-          <label htmlFor="resume" className="mb-1 text-sm font-medium ">
-            Upload Resume
+          <label htmlFor="source" className="mb-1 text-sm font-medium">
+            From where you Learn
           </label>
-          <input
-            id="resume"
-            type="file"
-            accept="application/pdf"
-            {...register("resume", { required: "pdf file is required" })}
+          <select
+            id="source"
+            {...register("source", {
+              required: "this field is required",
+            })}
             className="border border-gray-300 outline-none rounded p-2"
-          />
-          {errors.resume && (
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Select a source
+            </option>
+            <option value="Facebook">Facebook</option>
+            <option value="Twitter">Twitter</option>
+            <option value="Linkedin">Linkedin</option>
+            <option value="Other">Other</option>
+          </select>
+          {errors.source && (
             <span className="text-red-500 text-xs">
-              {errors.resume.message}
+              {errors.source.message}
             </span>
           )}
         </div>
@@ -189,11 +199,28 @@ const FormSection = () => {
             className="border border-gray-300 outline-none rounded p-2"
           />
         </div>
-
-        <div className="col-span-1 md:col-span-1">
+        <div className="flex flex-col ">
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="terms"
+              {...register("terms", {
+                required: "You must agree to the terms",
+              })}
+              className="w-4 h-4"
+            />
+            <label htmlFor="terms" className="text-sm">
+              I agree to the terms and conditions
+            </label>
+          </div>
+        </div>
+        {errors.terms && (
+          <p className="text-red-500 text-sm mt-1">{errors.terms.message}</p>
+        )}
+        <div className="flex justify-start md:justify-end">
           <button
             type="submit"
-            className="w-full bg-white text-black border py-2 rounded hover:bg-black hover:text-white  transition "
+            className="px-16 bg-white text-black border py-2 rounded hover:bg-black hover:text-white  transition "
           >
             Submit
           </button>
