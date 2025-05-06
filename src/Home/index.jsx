@@ -1,11 +1,10 @@
-import HeroSection from "@/Component/Pages/HeroSection";
-import React from "react";
+import GetAllUser from "@/Component/Pages/GetAllUser";
 
 const HomePage = () => {
   return (
-    <>
-      <HeroSection />
-    </>
+    <div>
+      <GetAllUser />
+    </div>
   );
 };
 

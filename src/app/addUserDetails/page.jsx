@@ -1,7 +1,6 @@
-import React from "react";
-import FormSection from "../UI/FormSection";
+import FormSection from "../../Component/UI/FormSection";
 
-const HeroSection = () => {
+const addUserDetails = () => {
   return (
     <div>
       <div className="flex justify-center pt-10">
@@ -14,4 +13,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default addUserDetails;

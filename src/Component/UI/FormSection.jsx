@@ -25,24 +25,113 @@ const FormSection = () => {
         className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"
       >
         <div className="flex flex-col">
-          <label htmlFor="companyName" className="mb-1 text-sm font-medium">
-            Company Name
+          <label htmlFor="name" className="mb-1 text-sm font-medium">
+            Name
           </label>
           <input
-            id="companyName"
-            {...register("companyName", {
-              required: "Company Name is required",
+            id="name"
+            {...register("name", {
+              required: "Name is required",
             })}
-            placeholder="Enter company name"
+            placeholder="Enter your name"
             className="border border-gray-300 outline-none rounded p-2"
           />
-          {errors.companyName && (
+          {errors.name && (
+            <span className="text-red-500 text-xs">{errors.name.message}</span>
+          )}
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="email" className="mb-1 text-sm font-medium">
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            {...register("email", {
+              required: "email is required",
+              pattern: {
+                value: /^[a-z0-9]+@[a-z0-9.-]+.[a-z]$/,
+                message: "Enter a valid email ",
+              },
+            })}
+            placeholder="Enter your email"
+            className="border border-gray-300 outline-none rounded p-2"
+          />{" "}
+          {errors.email && (
+            <span className="text-red-500 text-xs">{errors.email.message}</span>
+          )}
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="number" className="mb-1 text-sm font-medium">
+            Contact Number
+          </label>
+          <input
+            id="number"
+            type="tel"
+            {...register("number", {
+              required: "contact is required",
+              pattern: {
+                value: /^[0-9]{11}$/,
+                message: "Contact number must be exactly 11 digits",
+              },
+            })}
+            placeholder="Enter your number"
+            className="border border-gray-300 outline-none rounded p-2"
+          />
+          {errors.number && (
             <span className="text-red-500 text-xs">
-              {errors.companyName.message}
+              {errors.number.message}
             </span>
           )}
         </div>
-
+        <div className="flex flex-col">
+          <label htmlFor="location" className="mb-1 text-sm font-medium">
+            Location
+          </label>
+          <input
+            id="location"
+            {...register("location", {
+              required: "location is required",
+            })}
+            placeholder="Enter your location"
+            className="border border-gray-300 outline-none rounded p-2"
+          />
+          {errors.location && (
+            <span className="text-red-500 text-xs">
+              {errors.location.message}
+            </span>
+          )}
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="date" className="mb-1 text-sm font-medium">
+            Date Of Birth
+          </label>
+          <input
+            id="date"
+            type="date"
+            {...register("date", { required: "Date is required" })}
+            className="border border-gray-300 outline-none rounded p-2"
+          />
+          {errors.date && (
+            <span className="text-red-500 text-xs">{errors.date.message}</span>
+          )}
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="company" className="mb-1 text-sm font-medium">
+            Company Name
+          </label>
+          <input
+            id="company"
+            {...register("company", { required: "Name is required" })}
+            placeholder="Enter Company name"
+            className="border border-gray-300 outline-none rounded p-2"
+          />
+          {errors.company && (
+            <span className="text-red-500 text-xs">
+              {errors.company.message}
+            </span>
+          )}
+        </div>
         <div className="flex flex-col">
           <label htmlFor="jobTitle" className="mb-1 text-sm font-medium">
             Job Title
@@ -61,128 +150,28 @@ const FormSection = () => {
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="CompanyLocation" className="mb-1 text-sm font-medium">
-            Company Location
-          </label>
-          <input
-            id="CompanyLocation"
-            {...register("CompanyLocation", {
-              required: "CompanyLocation is required",
-            })}
-            placeholder="Enter Company location"
-            className="border border-gray-300 outline-none rounded p-2"
-          />
-          {errors.location && (
-            <span className="text-red-500 text-xs">
-              {errors.location.message}
-            </span>
-          )}
-        </div>
-
-        <div className="flex flex-col">
-          <label htmlFor="applicationDate" className="mb-1 text-sm font-medium">
-            Application Date
-          </label>
-          <input
-            id="applicationDate"
-            type="date"
-            {...register("applicationDate", { required: "Date is required" })}
-            className="border border-gray-300 outline-none rounded p-2"
-          />
-          {errors.applicationDate && (
-            <span className="text-red-500 text-xs">
-              {errors.applicationDate.message}
-            </span>
-          )}
-        </div>
-
-        <div className="flex flex-col">
-          <label htmlFor="contactPerson" className="mb-1 text-sm font-medium">
-            Contact Person
-          </label>
-          <input
-            id="contactPerson"
-            {...register("contactPerson", { required: "Name is required" })}
-            placeholder="Enter contact person"
-            className="border border-gray-300 outline-none rounded p-2"
-          />
-          {errors.contactPerson && (
-            <span className="text-red-500 text-xs">
-              {errors.contactPerson.message}
-            </span>
-          )}
-        </div>
-
-        <div className="flex flex-col">
-          <label htmlFor="contactEmail" className="mb-1 text-sm font-medium">
-            Contact Email
-          </label>
-          <input
-            id="contactEmail"
-            type="email"
-            {...register("contactEmail", {
-              required: "email is required",
-              pattern: {
-                value: /^[a-z0-9]+@[a-z0-9.-]+.[a-z]$/,
-                message: "Enter a valid email ",
-              },
-            })}
-            placeholder="Enter email"
-            className="border border-gray-300 outline-none rounded p-2"
-          />{" "}
-          {errors.contactEmail && (
-            <span className="text-red-500 text-xs">
-              {errors.contactEmail.message}
-            </span>
-          )}
-        </div>
-
-        <div className="flex flex-col">
-          <label htmlFor="contactNumber" className="mb-1 text-sm font-medium">
-            Contact Number
-          </label>
-          <input
-            id="contactNumber"
-            type="tel"
-            {...register("contactNumber", {
-              required: "contact is required",
-              pattern: {
-                value: /^[0-9]{11}$/,
-                message: "Contact number must be exactly 11 digits",
-              },
-            })}
-            placeholder="Enter contact number"
-            className="border border-gray-300 outline-none rounded p-2"
-          />
-          {errors.contactNumber && (
-            <span className="text-red-500 text-xs">
-              {errors.contactNumber.message}
-            </span>
-          )}
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="source" className="mb-1 text-sm font-medium">
-            From where you Learn
+          <label htmlFor="status" className="mb-1 text-sm font-medium">
+            marital status
           </label>
           <select
-            id="source"
-            {...register("source", {
+            id="status"
+            {...register("status", {
               required: "this field is required",
             })}
             className="border border-gray-300 outline-none rounded p-2"
             defaultValue=""
           >
             <option value="" disabled>
-              Select a source
+              Select a status
             </option>
-            <option value="Facebook">Facebook</option>
-            <option value="Twitter">Twitter</option>
-            <option value="Linkedin">Linkedin</option>
+            <option value="Married">Married</option>
+            <option value="Single">Single</option>
+
             <option value="Other">Other</option>
           </select>
-          {errors.source && (
+          {errors.status && (
             <span className="text-red-500 text-xs">
-              {errors.source.message}
+              {errors.status.message}
             </span>
           )}
         </div>
@@ -199,24 +188,26 @@ const FormSection = () => {
             className="border border-gray-300 outline-none rounded p-2"
           />
         </div>
-        <div className="flex flex-col ">
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              id="terms"
-              {...register("terms", {
-                required: "You must agree to the terms",
-              })}
-              className="w-4 h-4"
-            />
-            <label htmlFor="terms" className="text-sm">
-              I agree to the terms and conditions
-            </label>
+        <div>
+          <div className="flex flex-col ">
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="terms"
+                {...register("terms", {
+                  required: "You must agree to the terms",
+                })}
+                className="w-4 h-4"
+              />
+              <label htmlFor="terms" className="text-sm">
+                I agree to the terms and conditions
+              </label>
+            </div>
           </div>
+          {errors.terms && (
+            <p className="text-red-500 text-sm mt-1">{errors.terms.message}</p>
+          )}
         </div>
-        {errors.terms && (
-          <p className="text-red-500 text-sm mt-1">{errors.terms.message}</p>
-        )}
         <div className="flex justify-start md:justify-end">
           <button
             type="submit"
