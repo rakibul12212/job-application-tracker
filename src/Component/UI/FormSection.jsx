@@ -14,7 +14,11 @@ const FormSection = () => {
 
   const onSubmit = (data) => {
     console.log("file submitted", data);
-    localStorage.setItem("FormData", JSON.stringify(data));
+
+    const existingData = JSON.parse(localStorage.getItem("FormData")) || [];
+    existingData.push(data);
+    localStorage.setItem("FormData", JSON.stringify(existingData));
+
     toast.success("Form submitted successfully");
     reset();
   };
