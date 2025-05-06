@@ -6,6 +6,7 @@ import { RxCross1 } from "react-icons/rx";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  
 
   return (
     <nav className="bg-black shadow-md px-6 py-4 flex justify-between items-center sticky top-0 z-10">

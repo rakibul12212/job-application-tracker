@@ -14,6 +14,7 @@ const FormSection = () => {
 
   const onSubmit = (data) => {
     console.log("file submitted", data);
+    localStorage.setItem("FormData", JSON.stringify(data));
     toast.success("Form submitted successfully");
     reset();
   };
@@ -21,9 +22,11 @@ const FormSection = () => {
   return (
     <div className="p-6 mt-4 bg-white shadow-lg rounded-xl max-w-4xl mx-auto">
       <form
+        action=""
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"
       >
+        {/* name */}
         <div className="flex flex-col">
           <label htmlFor="name" className="mb-1 text-sm font-medium">
             Name
@@ -40,6 +43,8 @@ const FormSection = () => {
             <span className="text-red-500 text-xs">{errors.name.message}</span>
           )}
         </div>
+
+        {/* email */}
         <div className="flex flex-col">
           <label htmlFor="email" className="mb-1 text-sm font-medium">
             Email
@@ -56,11 +61,13 @@ const FormSection = () => {
             })}
             placeholder="Enter your email"
             className="border border-gray-300 outline-none rounded p-2"
-          />{" "}
+          />
           {errors.email && (
             <span className="text-red-500 text-xs">{errors.email.message}</span>
           )}
         </div>
+
+        {/* number */}
         <div className="flex flex-col">
           <label htmlFor="number" className="mb-1 text-sm font-medium">
             Contact Number
@@ -84,6 +91,8 @@ const FormSection = () => {
             </span>
           )}
         </div>
+
+        {/* location */}
         <div className="flex flex-col">
           <label htmlFor="location" className="mb-1 text-sm font-medium">
             Location
@@ -102,6 +111,8 @@ const FormSection = () => {
             </span>
           )}
         </div>
+
+        {/* dob */}
         <div className="flex flex-col">
           <label htmlFor="date" className="mb-1 text-sm font-medium">
             Date Of Birth
@@ -116,39 +127,8 @@ const FormSection = () => {
             <span className="text-red-500 text-xs">{errors.date.message}</span>
           )}
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="company" className="mb-1 text-sm font-medium">
-            Company Name
-          </label>
-          <input
-            id="company"
-            {...register("company", { required: "Name is required" })}
-            placeholder="Enter Company name"
-            className="border border-gray-300 outline-none rounded p-2"
-          />
-          {errors.company && (
-            <span className="text-red-500 text-xs">
-              {errors.company.message}
-            </span>
-          )}
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="jobTitle" className="mb-1 text-sm font-medium">
-            Job Title
-          </label>
-          <input
-            id="jobTitle"
-            {...register("jobTitle", { required: "Job title is required" })}
-            placeholder="Enter job title"
-            className="border border-gray-300 outline-none rounded p-2"
-          />
-          {errors.jobTitle && (
-            <span className="text-red-500 text-xs">
-              {errors.jobTitle.message}
-            </span>
-          )}
-        </div>
 
+        {/* maritial status */}
         <div className="flex flex-col">
           <label htmlFor="status" className="mb-1 text-sm font-medium">
             marital status
@@ -176,6 +156,42 @@ const FormSection = () => {
           )}
         </div>
 
+        {/* company */}
+        <div className="flex flex-col">
+          <label htmlFor="company" className="mb-1 text-sm font-medium">
+            Company Name
+          </label>
+          <input
+            id="company"
+            {...register("company", { required: "Name is required" })}
+            placeholder="Enter Company name"
+            className="border border-gray-300 outline-none rounded p-2"
+          />
+          {errors.company && (
+            <span className="text-red-500 text-xs">
+              {errors.company.message}
+            </span>
+          )}
+        </div>
+        {/* job title */}
+        <div className="flex flex-col">
+          <label htmlFor="jobTitle" className="mb-1 text-sm font-medium">
+            Job Title
+          </label>
+          <input
+            id="jobTitle"
+            {...register("jobTitle", { required: "Job title is required" })}
+            placeholder="Enter job title"
+            className="border border-gray-300 outline-none rounded p-2"
+          />
+          {errors.jobTitle && (
+            <span className="text-red-500 text-xs">
+              {errors.jobTitle.message}
+            </span>
+          )}
+        </div>
+
+        {/* note */}
         <div className="col-span-1 md:col-span-2 flex flex-col">
           <label htmlFor="notes" className="mb-1 text-sm font-medium">
             Additional Notes
@@ -188,6 +204,8 @@ const FormSection = () => {
             className="border border-gray-300 outline-none rounded p-2"
           />
         </div>
+
+        {/* terms */}
         <div>
           <div className="flex flex-col ">
             <div className="flex items-center space-x-2">
