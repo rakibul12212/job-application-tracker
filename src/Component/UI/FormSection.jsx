@@ -1,5 +1,4 @@
 "use client";
-
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,233 +12,183 @@ const FormSection = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("file submitted", data);
+    const newFormData = { ...data };
 
     const existingData = JSON.parse(localStorage.getItem("FormData")) || [];
-    existingData.push(data);
+    existingData.push(newFormData);
     localStorage.setItem("FormData", JSON.stringify(existingData));
 
-    toast.success("Form submitted successfully");
+    toast.success("Form submitted successfully!");
     reset();
   };
 
   return (
-    <div className="p-6 mt-4 bg-white shadow-lg rounded-xl max-w-4xl mx-auto">
+    <div className="max-w-5xl mx-auto p-10 bg-white rounded shadow-lg">
+      <ToastContainer />
       <form
-        action=""
         onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"
+        className="grid gap-4 md:grid-cols-2"
       >
-        {/* name */}
-        <div className="flex flex-col">
-          <label htmlFor="name" className="mb-1 text-sm font-medium">
-            Name
-          </label>
+        {/* Name */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Name</label>
           <input
-            id="name"
-            {...register("name", {
-              required: "Name is required",
-            })}
-            placeholder="Enter your name"
-            className="border border-gray-300 outline-none rounded p-2"
+            {...register("name", { required: "Name is required" })}
+            placeholder="Your Name"
+            className="w-full p-3 border border-gray-300 rounded-md outline-none"
           />
           {errors.name && (
-            <span className="text-red-500 text-xs">{errors.name.message}</span>
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
           )}
         </div>
 
-        {/* email */}
-        <div className="flex flex-col">
-          <label htmlFor="email" className="mb-1 text-sm font-medium">
-            Email
-          </label>
+        {/* Email */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Email</label>
           <input
-            id="email"
             type="email"
             {...register("email", {
-              required: "email is required",
+              required: "Email is required",
               pattern: {
-                value: /^[a-z0-9]+@[a-z0-9.-]+.[a-z]$/,
-                message: "Enter a valid email ",
+                value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                message: "Enter a valid email address",
               },
             })}
-            placeholder="Enter your email"
-            className="border border-gray-300 outline-none rounded p-2"
+            placeholder="Your Email"
+            className="w-full p-3 border border-gray-300 rounded-md outline-none"
           />
           {errors.email && (
-            <span className="text-red-500 text-xs">{errors.email.message}</span>
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
         </div>
 
-        {/* number */}
-        <div className="flex flex-col">
-          <label htmlFor="number" className="mb-1 text-sm font-medium">
-            Contact Number
-          </label>
+        {/* Phone */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Phone</label>
           <input
-            id="number"
             type="tel"
-            {...register("number", {
-              required: "contact is required",
+            {...register("phone", {
+              required: "Phone number is required",
               pattern: {
                 value: /^[0-9]{11}$/,
-                message: "Contact number must be exactly 11 digits",
+                message: " phone number should be 11 numbers",
               },
             })}
-            placeholder="Enter your number"
-            className="border border-gray-300 outline-none rounded p-2"
+            placeholder="Your Phone"
+            className="w-full p-3 border border-gray-300 rounded-md outline-none"
           />
-          {errors.number && (
-            <span className="text-red-500 text-xs">
-              {errors.number.message}
-            </span>
+          {errors.phone && (
+            <p className="text-red-500 text-sm">{errors.phone.message}</p>
           )}
         </div>
 
-        {/* location */}
-        <div className="flex flex-col">
-          <label htmlFor="location" className="mb-1 text-sm font-medium">
-            Location
-          </label>
+        {/* Gender */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Gender</label>
+          <select
+            {...register("gender", { required: "Please select your gender" })}
+            className="w-full p-3 border border-gray-300 rounded-md outline-none"
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          {errors.gender && (
+            <p className="text-red-500 text-sm">{errors.gender.message}</p>
+          )}
+        </div>
+
+        {/* Location */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Location</label>
           <input
-            id="location"
-            {...register("location", {
-              required: "location is required",
-            })}
-            placeholder="Enter your location"
-            className="border border-gray-300 outline-none rounded p-2"
+            {...register("location", { required: "Location is required" })}
+            placeholder="Your Location"
+            className="w-full p-3 border border-gray-300 rounded-md outline-none"
           />
           {errors.location && (
-            <span className="text-red-500 text-xs">
-              {errors.location.message}
-            </span>
+            <p className="text-red-500 text-sm">{errors.location.message}</p>
           )}
         </div>
 
-        {/* dob */}
-        <div className="flex flex-col">
-          <label htmlFor="date" className="mb-1 text-sm font-medium">
-            Date Of Birth
-          </label>
+        {/* Date */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Date</label>
           <input
-            id="date"
             type="date"
             {...register("date", { required: "Date is required" })}
-            className="border border-gray-300 outline-none rounded p-2"
+            className="w-full p-3 border border-gray-300 rounded-md outline-none"
           />
           {errors.date && (
-            <span className="text-red-500 text-xs">{errors.date.message}</span>
+            <p className="text-red-500 text-sm">{errors.date.message}</p>
           )}
         </div>
 
-        {/* maritial status */}
-        <div className="flex flex-col">
-          <label htmlFor="status" className="mb-1 text-sm font-medium">
-            marital status
-          </label>
-          <select
-            id="status"
-            {...register("status", {
-              required: "this field is required",
-            })}
-            className="border border-gray-300 outline-none rounded p-2"
-            defaultValue=""
-          >
-            <option value="" disabled>
-              Select a status
-            </option>
-            <option value="Married">Married</option>
-            <option value="Single">Single</option>
-
-            <option value="Other">Other</option>
-          </select>
-          {errors.status && (
-            <span className="text-red-500 text-xs">
-              {errors.status.message}
-            </span>
-          )}
-        </div>
-
-        {/* company */}
-        <div className="flex flex-col">
-          <label htmlFor="company" className="mb-1 text-sm font-medium">
-            Company Name
-          </label>
+        {/* Company */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Company</label>
           <input
-            id="company"
-            {...register("company", { required: "Name is required" })}
-            placeholder="Enter Company name"
-            className="border border-gray-300 outline-none rounded p-2"
+            {...register("company", { required: "Company name is required" })}
+            placeholder="Your Company"
+            className="w-full p-3 border border-gray-300 rounded-md outline-none"
           />
           {errors.company && (
-            <span className="text-red-500 text-xs">
-              {errors.company.message}
-            </span>
+            <p className="text-red-500 text-sm">{errors.company.message}</p>
           )}
         </div>
-        {/* job title */}
-        <div className="flex flex-col">
-          <label htmlFor="jobTitle" className="mb-1 text-sm font-medium">
-            Job Title
-          </label>
+
+        {/* Job Title */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Job Title</label>
           <input
-            id="jobTitle"
             {...register("jobTitle", { required: "Job title is required" })}
-            placeholder="Enter job title"
-            className="border border-gray-300 outline-none rounded p-2"
+            placeholder="Your Job Title"
+            className="w-full p-3 border border-gray-300 rounded-md outline-none"
           />
           {errors.jobTitle && (
-            <span className="text-red-500 text-xs">
-              {errors.jobTitle.message}
-            </span>
+            <p className="text-red-500 text-sm">{errors.jobTitle.message}</p>
           )}
         </div>
 
-        {/* note */}
-        <div className="col-span-1 md:col-span-2 flex flex-col">
-          <label htmlFor="notes" className="mb-1 text-sm font-medium">
-            Additional Notes
-          </label>
+        {/* Message */}
+        <div className="md:col-span-2">
+          <label className="block text-sm font-medium mb-1">Message</label>
           <textarea
-            id="notes"
-            rows={4}
-            {...register("notes")}
-            placeholder="Write something..."
-            className="border border-gray-300 outline-none rounded p-2"
+            rows="4"
+            {...register("message")}
+            placeholder="Your Message"
+            className="w-full p-3 border border-gray-300 rounded-md outline-none"
           />
         </div>
 
-        {/* terms */}
-        <div>
-          <div className="flex flex-col ">
-            <div className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                id="terms"
-                {...register("terms", {
-                  required: "You must agree to the terms",
-                })}
-                className="w-4 h-4"
-              />
-              <label htmlFor="terms" className="text-sm">
-                I agree to the terms and conditions
-              </label>
-            </div>
-          </div>
-          {errors.terms && (
-            <p className="text-red-500 text-sm mt-1">{errors.terms.message}</p>
-          )}
+        {/* Agreement */}
+        <div className="md:col-span-2 flex items-center">
+          <input
+            type="checkbox"
+            {...register("agreement", {
+              required: "You must agree before submitting",
+            })}
+            className="h-5 w-5 mr-2"
+          />
+          <label className="text-sm">I agree to the terms and conditions</label>
         </div>
-        <div className="flex justify-start md:justify-end">
+        {errors.agreement && (
+          <p className="text-red-500 text-sm md:col-span-2">
+            {errors.agreement.message}
+          </p>
+        )}
+
+        {/* Submit Button */}
+        <div>
           <button
             type="submit"
-            className="px-16 bg-white text-black border py-2 rounded hover:bg-black hover:text-white  transition "
+            className="px-10 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 outline-none"
           >
             Submit
           </button>
         </div>
       </form>
-      <ToastContainer />
     </div>
   );
 };
