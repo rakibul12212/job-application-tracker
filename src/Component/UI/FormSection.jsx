@@ -19,6 +19,7 @@ const FormSection = () => {
     const existingData = JSON.parse(rawData);
     existingData.push(data);
     localStorage.setItem("formData", JSON.stringify(existingData));
+
     // console.log(data);
 
     toast.success("Form submitted successfully");
