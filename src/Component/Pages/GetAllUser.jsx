@@ -21,10 +21,10 @@ const getAllUser = () => {
           {user.map((user, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-md p-6 w-full"
+              className="bg-gray-50 rounded-lg shadow-md p-6 w-full"
             >
-              <div className="shadow-md rounded-md p-6">
-                <p className="text-xl font-semibold text-left pb-3 border-b border-gray-200">
+              <div className="bg-white shadow-md rounded-md p-6">
+                <p className="text-xl font-semibold text-left pb-3  border-b border-gray-200">
                   details
                 </p>
                 <p>

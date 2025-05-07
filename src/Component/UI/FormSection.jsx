@@ -26,7 +26,7 @@ const FormSection = () => {
   };
 
   return (
-    <div className="p-6 mt-4 bg-white shadow-lg rounded-xl max-w-4xl mx-auto">
+    <div className="p-6 my-8 bg-gray-50 shadow-lg rounded-xl max-w-4xl mx-auto">
       <form
         action=""
         onSubmit={handleSubmit(onSubmit)}
