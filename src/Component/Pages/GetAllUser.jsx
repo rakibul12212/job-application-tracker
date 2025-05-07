@@ -3,10 +3,10 @@ import { MdDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 
 const userData = localStorage.getItem("formData");
+const userList = JSON.parse(userData);
 
-const user = JSON.parse(userData);
-console.log(user);
-console.log(user.name);
+// console.log(userList);
+// console.log(userList.name);
 
 const getAllUser = () => {
   return (
@@ -18,7 +18,7 @@ const getAllUser = () => {
       </div>
       <div className="w-full py-10 px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {user.map((user, index) => (
+          {userList.map((user, index) => (
             <div
               key={index}
               className="bg-gray-50 rounded-lg shadow-md p-6 w-full"
@@ -65,9 +65,13 @@ const getAllUser = () => {
                 </p>
               </div>
               <div className="flex items-center gap-x-5 pt-4">
-                <button className="border px-3 py-1 rounded-md shadow-md">
+                <button
+                  key={index}
+                  className="border px-3 py-1 rounded-md shadow-md"
+                >
                   <MdDelete size={24} className="hover:text-red-500" />
                 </button>
+
                 <button className="border px-3 py-1 rounded-md shadow-md">
                   <FaRegEdit size={24} className="hover:text-gray-600 " />
                 </button>
